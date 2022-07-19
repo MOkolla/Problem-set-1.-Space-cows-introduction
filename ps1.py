@@ -80,7 +80,33 @@ def brute_force_cow_transport(cows,limit=10):
     trips
     """
     # TODO: Your code here
-    pass
+    # create a preliminary trip list
+    trips = []
+    # Make a power list with the helper function and sort it by shortest to longest!
+    power_list = sorted(get_partitions(cows), key = len)
+    # It's important to note that this returns a list of names, which we'll need to sort.
+    # Later, look up the dictionary
+    # Narrow down the power list:
+    possibilities = []
+    for index in power_list:
+        ship = []
+        for j in index:
+            ship_weights = []
+            for x in j:
+                ship_weights.append(cows[x])
+            ship.append(sum(ship_weights))
+        if all(c <= limit for c in ship):
+            possibilities.append(index)
+    # There are some duplication in possibiliies that need to be deleted.
+    pruned_possibilities = []
+    for x in possibilities:
+        if x not in pruned_possibilities:
+            pruned_possibilities.append(x)
+    # now determine the shortest possible list length:
+    min_list_len = min(map(len, pruned_possibilities))
+    for k in pruned_possibilities:
+        if len(k) == min_list_len:
+            return k
 
         
 # Problem 3
