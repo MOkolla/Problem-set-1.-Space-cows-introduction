@@ -152,37 +152,7 @@ def compare_cow_transport_algorithms():
     Returns:
     Does not return anything.
     """
-    # TODO: Your code here
-    all_trips = []
-    next_trip = []
-    next_trip_weight = 0
-   
-    remaining = cows.copy()
-   
-    while len(remaining) > 0:
-        heaviest_by_name = sorted(remaining, key = remaining.__getitem__, reverse = True)
-        # iterate through all remaining cows, starting with the one with the heaviest fit.
-        for name in heaviest_by_name: 
-           
-            if next_trip_weight + remaining[name] <= limit:
-            # add the cow's name to the list of things to do on the next trip
-                next_trip.append(name)
-                # increment the weight
-                next_trip_weight += remaining[name]
-                # remove cow from remaining
-                del(remaining[name])  
-           
-            if next_trip_weight == limit: 
-                break
-           
-            if next_trip_weight > limit:
-                raise ValueError ("ship will crash, weight exceeded, abort packing process")
-               
-        all_trips.append(next_trip)
-        next_trip = []
-        next_trip_weight = 0
-   
-    return all_trips
+    
 
 
 """
